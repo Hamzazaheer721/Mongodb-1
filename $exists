@@ -1,0 +1,10 @@
+  - $exists => Syntax => { field: { $exists: <boolean> } } 
+  - When <boolean> is true, then it will match all the documents where the fields exists, regardless of what value is assigned to them.
+    - Fields can be even null
+    - This property is like the Object.hasOwnProperty()
+  - If the <boolean> is false, then it will match all the documents where the field is absent.
+  
+  
+  - For Example: 
+    - db.inventory.find( { qty: { $exists: true, $nin: [ 5, 15 ] } } );
+    - It will match all the documents where the quantity field is present and its value is not 5 or 15.
