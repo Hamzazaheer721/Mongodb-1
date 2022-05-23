@@ -1,1 +1,4 @@
-
+ - $or
+ - It performs the logical OR Operation on array of two or more <expression> and selects the document which satisfies atleast one of the <expression>.
+ - For Example:
+ - db.users.find( { $or: [ { name: "Hamza" }, { age: { $lt: 25 } } ] } );
