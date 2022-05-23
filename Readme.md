@@ -34,3 +34,45 @@
 
 - find()
   to-be-continued
+  
+- $unset (Removing a field in migration)
+  - for example:
+      { "_id" : 1, "name" : "Wag", "type" : "Dog", "weight" : 20 }
+      { "_id" : 2, "name" : "Bark", "type" : "Dog", "weight" : 10 }
+      { "_id" : 6, "name" : "Fetch", "type" : "Dog", "weight" : 17 }
+      { "_id" : 7, "name" : "Jake", "type" : "Dog", "weight" : 30 }
+  - db.dogs.updateMany({}, { $unset: { type: "" }});
+  - Output: { "acknowledged" : true, "matchedCount" : 4, "modifiedCount" : 4 }
+  
+  - Using db.dogs.find()
+    { "_id" : 1, "name" : "Wag", "weight" : 20 }
+    { "_id" : 2, "name" : "Bark", "weight" : 10 }
+    { "_id" : 6, "name" : "Fetch", "weight" : 17 }
+    { "_id" : 7, "name" : "Jake", "weight" : 30 
+  - For Removing multiple fields => db.dogs.updateMany({}, { $unset: { name: "", weight: ""} } );
+
+  - For Embedded Documents 
+      {
+        "_id" : 1,
+        "name" : "Wag",
+        "details" : {
+          "type" : "Dog",
+          "weight" : 20,
+          "awards" : {
+            "Florida Dog Awards" : "Top Dog",
+            "New York Marathon" : "Fastest Dog",
+            "Sumo 2020" : "Biggest Dog"
+          }
+        }
+      }
+  - To remove "awards" => db.pets.updateMany( { _id: 1 }, { $unset: { "details.awards": "" } } )
+  - Output: { "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+  - Result:
+     {
+        "_id" : 1,
+        "name" : "Wag",
+        "details" : {
+          "type" : "Dog",
+          "weight" : 20
+        }
+      }
