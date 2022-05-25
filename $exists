@@ -17,4 +17,5 @@
             { artId : { $exists: true } }
           ]
         })
+        db.collection.find({userId : {$exists : true}, artId : {$exists : true}})
 
