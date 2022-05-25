@@ -10,4 +10,11 @@
     - It will match all the documents where the quantity field is present and its value is not 5 or 15.
     
     - db.student.find({"details.game":{$exists:true}})
+    - Checking multiple fields with $and
+        db.collection.find({
+          $and : [
+            { userId: { $exists: true } },
+            { artId : { $exists: true } }
+          ]
+        })
 
