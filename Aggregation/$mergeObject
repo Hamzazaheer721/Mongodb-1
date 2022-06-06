@@ -1,0 +1,45 @@
+db.orders.aggregate([
+  {
+    "$lookup": {
+      "from": "epikBox",
+      "localField": "assignedTo",
+      "foreignField": "assignedTo_2",
+      "as": "EpikBoxes"
+    }
+  },
+  {
+    "$lookup": {
+      "from": "user",
+      "localField": "EpikBoxes._id",
+      "foreignField": "_id_3",
+      "as": "users"
+    }
+  },
+  {
+    "$replaceRoot": {
+      "newRoot": {
+        "$mergeObjects": [
+          {
+            "$arrayElemAt": [
+              "$EpikBoxes",
+              0
+            ]
+          },
+          {
+            "$arrayElemAt": [
+              "$users",
+              0
+            ]
+          },
+          "$$ROOT"
+        ]
+      }
+    }
+  },
+  {
+    "$project": {
+      "EpikBoxes": 0,
+      "users": 0
+    }
+  }
+])
