@@ -14,6 +14,15 @@
   })
 - "modems.$" will return only that object in the array where the condition was satisfied.
 
+- METHOD # 2
+- db.orders.find({
+  "modems.type": {
+    $in: [
+      "online"
+    ]
+  }
+})
+
 
 
 /// SAMPLE DB ///
