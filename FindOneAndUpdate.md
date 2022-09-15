@@ -1,0 +1,7 @@
+- FindOneAndUpdate Options
+   - new: true is used to return the updated Document after it has been updated against right filter and update.
+   - useFineAndModify: false is used to avoid the depreciation error.
+   - upsert: true will check if the document is found against filter if its not found then mongodb will add the document by combining filter and update.
+   - rawResult: true will check if the document is upserted or not. the resultant document result will come like => { lastErrorObject: {}, value: {}, ok: 1}
+      - document.value instanceof Users // true or false
+      - document.lastErrorObject.updatedExisting // true if mongodb didn't upserted and viceversa
