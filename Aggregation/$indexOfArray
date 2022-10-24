@@ -1,0 +1,29 @@
+Searches an array for an occurance of specified value. 
+  - It will return -1 if the value is not found in the array
+  - Returns index of first value found in the array.
+  - Returns null if the field is not array.
+  
+
+
+Examples: 
+db.inventory.insertMany( [
+   { _id: 0, items: [ "one", "two", "three" ] },
+   { _id: 1, items: [ 1, 2, 3 ] },
+   { _id: 2, items: [ 1, 2, 3, 2 ] },
+   { _id: 3, items: [ null, null, 2 ] },
+   { _id: 4, items: [ 2, null, null, 2 ] },
+   { _id: 5, items: null },
+   { _id: 6, amount: 3 }
+] )
+
+
+Output: 
+[
+   { _id: 0, index: -1 },
+   { _id: 1, index: 1 },
+   { _id: 2, index: 1 },
+   { _id: 3, index: 2 },
+   { _id: 4, index: 0 },
+   { _id: 5, index: null },
+   { _id: 6, index: null }
+]
